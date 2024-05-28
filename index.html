@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser-arcade-physics.min.js"></script>
+</head>
+
+<body>
+
+    <script type="module">
+        import MainMenu from './scripts/MainMenu.js'
+        import Scene1 from './scripts/Scene1.js'
+
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 620,
+            mode: Phaser.Scale.RESIZE,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+            parent: 'phaser-example',
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: false
+                }
+            },
+            scene: [MainMenu, Scene1],
+            dom: {
+                createContainer: true
+            },
+        };
+
+        const game = new Phaser.Game(config);
+    </script>
+
+
+</body>
+
+</html>
