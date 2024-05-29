@@ -1,6 +1,6 @@
 const listButtonKey = [
     { key: 'exit', y: 770, x: 30, scale: 0.2 },
-    { key: 'door', y: 400, x: 300, scale: 0.5 },
+    { key: 'door', y: 400, x: 300, scale: 3 },
     { key: 'prev', y: 50, x: 300, scale: 0.2, hidden: true },
     { key: 'next', y: 750, x: 300, scale: 0.2, hidden: true },
     { key: 'lift', y: 400, x: 300, scale: 1, hidden: true },
@@ -31,10 +31,11 @@ class Scene1 extends Phaser.Scene {
         this.load.image('prev', 'assets/prev.png');
         this.load.image('next', 'assets/next.png');
         this.load.image('exit', 'assets/exit.png');
-        this.load.image('door', 'assets/door.jpg');
+        this.load.spritesheet('door', 'assets/door2.png', { frameWidth: 68, frameHeight: 96 });
         this.load.image('lift', 'assets/lift.png');
         this.load.image('chestClose', 'assets/chestClose.png');
         this.load.image('chestOpen', 'assets/chestOpen.png');
+        this.load.image('victory', 'assets/victory.png');
 
         this.load.audio('click', 'audios/click.mp3');
         this.load.audio('doorOpen', 'audios/doorOpen.mp3');
@@ -46,16 +47,14 @@ class Scene1 extends Phaser.Scene {
 
         this.load.html('passwordForm', 'forms/passwordForm.html');
         this.load.html('jumpscareHtml', 'forms/jumpscare.html');
+        this.load.html('scroll1', 'forms/scroll1.html');
+        this.load.html('scroll2', 'forms/scroll2.html');
     }
 
     getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    actionUser() {
-
     }
 
     create() {
@@ -98,12 +97,29 @@ class Scene1 extends Phaser.Scene {
             }
         }
 
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('door', { frames: [7] }),
+            frameRate: 0,
+            repeat: 0,
+        });
+
+        this.anims.create({
+            key: 'open',
+            frames: this.anims.generateFrameNumbers('door', { frames: [8, 9, 10, 11, 12, 13, 14, 15] }),
+            frameRate: 6,
+            repeat: 0,
+        });
+        buttons[1].play('idle');
+
         for (let i = 0; i < 4; i++) {
             hintArea1.push(this.add.sprite(this.getRandomInt(hintPosition[i].minX, hintPosition[i].maxX), this.getRandomInt(hintPosition[i].minY, hintPosition[i].maxY), 'chestClose').setScale(0.1));
             const shape2 = new Phaser.Geom.Rectangle(0, 0, hintArea1[i].width, hintArea1[i].height);
             hintArea1[i].setInteractive(shape2, Phaser.Geom.Rectangle.Contains);
             if (hintArea1Status.some(x => !x.zonk)) {
                 hintArea1Status.push({ open: false, zonk: true });
+            } else if (i === 3) {
+                hintArea1Status.push({ open: false, zonk: false });
             } else {
                 hintArea1Status.push({ open: false, zonk: !!Math.floor(Math.random() * 2) });
             }
@@ -116,6 +132,8 @@ class Scene1 extends Phaser.Scene {
             hintArea2[i].setInteractive(shape3, Phaser.Geom.Rectangle.Contains);
             if (hintArea2Status.some(x => !x.zonk)) {
                 hintArea2Status.push({ open: false, zonk: true });
+            } else if (i === 3) {
+                hintArea2Status.push({ open: false, zonk: false });
             } else {
                 hintArea2Status.push({ open: false, zonk: !!Math.floor(Math.random() * 2) });
             }
@@ -203,6 +221,30 @@ class Scene1 extends Phaser.Scene {
             element.setVisible(true);
         }
 
+        const handleHideHint = () => {
+            for (let i = 0; i < 4; i++) {
+                if (place === 1) {
+                    hintArea1[i].setActive(false);
+                    hintArea1[i].setVisible(false);
+                } else if (place === 2) {
+                    hintArea2[i].setActive(false);
+                    hintArea2[i].setVisible(false);
+                }
+            }
+        }
+
+        const handleShowHint = () => {
+            for (let i = 0; i < 4; i++) {
+                if (place === 1) {
+                    hintArea1[i].setActive(true);
+                    hintArea1[i].setVisible(true);
+                } else if (place === 2) {
+                    hintArea2[i].setActive(true);
+                    hintArea2[i].setVisible(true);
+                }
+            }
+        }
+
         buttons[0].on('pointerdown', () => {
             this.scene.start('MainMenu');
             soundClick.play();
@@ -213,6 +255,7 @@ class Scene1 extends Phaser.Scene {
         buttons[1].on('pointerdown', () => {
             soundDoorOpen.play();
             soundDoorOpen.setVolume(0.3);
+            buttons[1].play('open');
             handleOpenDoor();
         })
 
@@ -239,15 +282,81 @@ class Scene1 extends Phaser.Scene {
         elementJumpscare.addListener('click');
         elementJumpscare.setActive(false);
         elementJumpscare.setVisible(false);
+
+        const elementScroll1 = this.add.dom(400, -200).createFromCache('scroll1');
+        elementScroll1.setPerspective(800);
+        elementScroll1.addListener('click');
+        elementScroll1.setActive(false);
+        elementScroll1.setVisible(false);
+        elementScroll1.on('click', (event) => {
+            soundClick.play();
+            this.tweens.add({
+                targets: elementScroll1,
+                y: -200,
+                duration: 500,
+                ease: 'Power3'
+            });
+            setTimeout(() => {
+                elementScroll1.setActive(false);
+                elementScroll1.setVisible(false);
+                elementScroll1.removeListener('click');
+            }, 500)
+        });
+
+        const elementScroll2 = this.add.dom(400, -200).createFromCache('scroll2');
+        elementScroll2.setPerspective(800);
+        elementScroll2.addListener('click');
+        elementScroll2.setActive(false);
+        elementScroll2.setVisible(false);
+        elementScroll2.on('click', (event) => {
+            soundClick.play();
+            this.tweens.add({
+                targets: elementScroll2,
+                y: -200,
+                duration: 500,
+                ease: 'Power3'
+            });
+            setTimeout(() => {
+                elementScroll2.setActive(false);
+                elementScroll2.setVisible(false);
+                elementScroll2.removeListener('click');
+            }, 500)
+        });
+
+        const handleShowScrollHint = () => {
+            if (place === 1) {
+                elementScroll1.setActive(true);
+                elementScroll1.setVisible(true);
+                this.tweens.add({
+                    targets: elementScroll1,
+                    y: 300,
+                    duration: 500,
+                    ease: 'Power3'
+                });
+            } else if (place === 2) {
+                elementScroll2.setActive(true);
+                elementScroll2.setVisible(true);
+                this.tweens.add({
+                    targets: elementScroll2,
+                    y: 300,
+                    duration: 500,
+                    ease: 'Power3'
+                });
+            }
+        }
+
         const handleClickChest = (hintAreaStatus, hintArea) => {
             if (!hintAreaStatus.open) {
                 soundClick.play();
                 if (hintAreaStatus.zonk) {
+                    handleHideNavigation();
+                    handleHideHint();
                     jumpscare.play();
                     elementJumpscare.setActive(true);
                     elementJumpscare.setVisible(true);
                 } else {
                     scrollOpen.play();
+                    handleShowScrollHint();
                     hintCollected++;
                 }
                 hintArea.setTexture('chestOpen')
@@ -255,6 +364,8 @@ class Scene1 extends Phaser.Scene {
             }
         }
         jumpscare.on('complete', () => {
+            handleShowNavigation();
+            handleShowHint();
             elementJumpscare.setActive(false);
             elementJumpscare.setVisible(false);
         })
@@ -288,6 +399,8 @@ class Scene1 extends Phaser.Scene {
         const element = this.add.dom(400, 300).createFromCache('passwordForm');
         element.setPerspective(800);
         element.addListener('click');
+        element.setActive(false);
+        element.setVisible(false);
         element.on('click', (event) => {
             if (event.target.name === 'submit') {
                 const inputPassword = element.getChildByName('password');
@@ -303,6 +416,12 @@ class Scene1 extends Phaser.Scene {
                     liftOpen.play();
                     setTimeout(() => {
                         winning.play();
+                        this.tweens.add({
+                            targets: this.add.sprite(400, 0, 'victory').setScale(0.4),
+                            y: 300,
+                            duration: 1000,
+                            ease: 'Power3'
+                        });
                     }, 1500)
                 } else {
                     //  Flash the prompt
@@ -317,8 +436,6 @@ class Scene1 extends Phaser.Scene {
                 element.setVisible(false);
             }
         });
-        element.setActive(false);
-        element.setVisible(false);
 
         winning.on('complete', () => this.scene.start('MainMenu'));
     }

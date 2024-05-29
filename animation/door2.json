@@ -1,0 +1,314 @@
+{
+	"textures": [
+		{
+			"image": "../animations/door2-0.png",
+			"format": "BGRA8888",
+			"size": {
+				"w": 476,
+				"h": 192
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "../animations/door2-0.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-1.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 68,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 136,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 204,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 272,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-5.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 340,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-6.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 408,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-7.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 0,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-8.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 68,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-9.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 136,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 204,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 272,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-12.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 340,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				},
+				{
+					"filename": "../animations/door2-13.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 68,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 68,
+						"h": 96
+					},
+					"frame": {
+						"x": 408,
+						"y": 96,
+						"w": 68,
+						"h": 96
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9754acce0c6a8797fa594987889563de:e4245ac998d3f1b8ced5079634e9f158:75efe6577e8809df219c59a30ee20877$"
+	}
+}
